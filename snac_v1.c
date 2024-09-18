@@ -198,7 +198,7 @@ setlocale(LC_CTYPE, "");
 		snake = moveDir(snake,key);}
 		break;	
 		case -21://ы
-		case 101: //Ы
+		case -101: //Ы
 		case 's'://115 's'
 		case 'S'://83 'S'
 		key=DOWN;
