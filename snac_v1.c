@@ -188,6 +188,8 @@ setlocale(LC_CTYPE, "");
         char tmp=(_getch());    
 		switch (tmp) 
 			{
+		case -28: // ф
+		case -108:// Ф
 		case 'a'://97 
 		case 'A'://65 
 		key=LEFT;
@@ -195,6 +197,8 @@ setlocale(LC_CTYPE, "");
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
+		case -21://ы
+		case 101: //Ы
 		case 's'://115 's'
 		case 'S'://83 'S'
 		key=DOWN;
@@ -202,6 +206,8 @@ setlocale(LC_CTYPE, "");
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
+		case -94: //в
+		case -126://В
 		case 'd': //100 'd'
 		case 'D'://68 'D'
 		key=RIGHT;
@@ -209,7 +215,8 @@ setlocale(LC_CTYPE, "");
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
-		
+		case -26://ц
+		case -106: //Ц
 		case 'w'://119 'w'
 		case 'W'://87 'W'
 		key=UP;
@@ -217,6 +224,8 @@ setlocale(LC_CTYPE, "");
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
+		case -87: //й
+		case -119://Й
 		case 'Q'://81 'Q'
 		case 'q'://113 'q'
 		printf("Bay!");
