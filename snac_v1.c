@@ -177,13 +177,22 @@ return 0;
 int main(){
 	
 setlocale(LC_CTYPE, "");
+<<<<<<< HEAD
+=======
+//SetConsoleCP(1251);
+//SetConsoleOutputCP(1251);
+//_tsetlocale(LC_ALL, _T("Russian_Russia.65001"));
+>>>>>>> e65ebb0 (add auto move)
 	struct snake_t snake = initSnake( 10, 5, 2);
 	printSnake(snake);
 	int32_t key;
 	
 	while(1)
 	{
-		
+		// ch1 = getc(stdin);
+        //ch2 = getchar();
+        //putchar(ch1);
+        //if (ch2) putchar(ch2);
 		 if(_kbhit())
 		 {
         char tmp=(_getch());    
@@ -230,6 +239,7 @@ setlocale(LC_CTYPE, "");
 		break;	
 			}
 		}
+		else snake = moveDir(snake,key=snake.preddirection);
 		sleep(1);
 		system("cls");
 		printSnake(snake);
