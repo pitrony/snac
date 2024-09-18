@@ -176,10 +176,7 @@ return 0;
 	
 int main(){
 	
-//setlocale(LC_CTYPE, "Rus");
-//SetConsoleCP(1251);
-//SetConsoleOutputCP(1251);
-//_tsetlocale(LC_ALL, _T("Russian_Russia.65001"));
+setlocale(LC_CTYPE, "");
 	struct snake_t snake = initSnake( 10, 5, 2);
 	printSnake(snake);
 	int32_t key;
@@ -192,7 +189,6 @@ int main(){
         char tmp=(_getch());    
 		switch (tmp) 
 			{
-		//case "ф":
 		case 97://97 'a'
 		case 65://65 'A'
 		key=LEFT;
