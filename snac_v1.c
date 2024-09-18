@@ -188,45 +188,44 @@ setlocale(LC_CTYPE, "");
         char tmp=(_getch());    
 		switch (tmp) 
 			{
-		//case "ф":
-		case 97://97 'a'
-		case 65://65 'A'
+		case 'a'://97 
+		case 'A'://65 
 		key=LEFT;
 		if(checkDirection(&snake, key))
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
-		case 115 ://115 's'
-		case 83://83 'S'
+		case 's'://115 's'
+		case 'S'://83 'S'
 		key=DOWN;
 		if(checkDirection(&snake, key))
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
-		case 100: //100 'd'
-		case 68://68 'D'
+		case 'd': //100 'd'
+		case 'D'://68 'D'
 		key=RIGHT;
 		if(checkDirection(&snake, key))
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
 		
-		case 119://119 w
-		case 87://87 W
+		case 'w'://119 'w'
+		case 'W'://87 'W'
 		key=UP;
 		if(checkDirection(&snake, key))
 		{chageDirection(&snake, key);
 		snake = moveDir(snake,key);}
 		break;	
-		case 81://'Q'
-		case 113://'q'
+		case 'Q'://81 'Q'
+		case 'q'://113 'q'
 		printf("Bay!");
 
 		return 0;
 		break;
 		
 		default:
-		printf("wasd - for control Q - for exit");
+		printf("w a s d - for control Q - for exit");
 		break;	
 			}
 		}
