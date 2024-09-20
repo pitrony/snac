@@ -229,8 +229,15 @@ setlocale(LC_CTYPE, "");
 		case 'Q'://81 'Q'
 		case 'q'://113 'q'
 		printf("Bay!");
-
 		return 0;
+		break;
+		
+		//case -87: //й
+		//case -119://Й
+		case 'P':// 'P'
+		case 'p':// 'p'
+		printf("Game in PAUSE\n\n");
+		system("pause");
 		break;
 		
 		default:
