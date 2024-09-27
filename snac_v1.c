@@ -14,7 +14,7 @@
 #define MAX_FOOD_SIZE 20
 double DELAY=0.1;
 #define MAX_TAIL_SIZE 10
-#define FOOD_EXPIRE_SECONDS 30
+#define FOOD_EXPIRE_SECONDS 10
 #define SEED_NUMBER 4
 typedef struct tail_t{
 	int x;
@@ -48,14 +48,16 @@ char point;
 uint8_t enable;
 } food[MAX_FOOD_SIZE];
 	
-
-
-//enum {LEFT=1, UP, RIGHT, DOWN, STOP_GAME=KEY_F(10), CONTROLS=3};
 enum {LEFT=1, UP, RIGHT, DOWN, STOP_GAME='Q', CONTROLS=3};
-//struct control_buttons default_controls[CONTROLS]= {{KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT},
-//{'s','w','a','d'} , {'S','W','A','D'}};	
 struct control_buttons default_controls[CONTROLS]={{'s','w','a','d'} , {'S','W','A','D'}}; 
 
+struct colors {
+int color_snake;
+int color_snake2;
+int color_level;
+int color_food;
+int color_message;
+};
 // --> x
 // || Y
 // \/
@@ -168,12 +170,6 @@ void gotoxy(int x,int y)
     ScreenBufInfo.dwCursorPosition.Y=y;
     SetConsoleCursorPosition(OutputHandle,ScreenBufInfo.dwCursorPosition);
 }
-//{
-  //  COORD cd;
-    //cd.X=x;
-    //cd.Y=y;
-    //SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),cd);
-//}
 
 void putFoodSeed(struct food *fp)
 {
@@ -182,7 +178,7 @@ gotoxy(fp->y, fp->x);
 printf(" ");
 fp->x=rand()%(MAX_X-1);
 fp->y=rand()%(MAX_Y-2)+1;
-fp->put_time=time(NULL);
+fp->put_time = time(NULL);
 fp->point='$';
 fp->enable=1;
 spoint[1]=fp->point;
@@ -228,12 +224,13 @@ if(head==NULL||head->tsize>MAX_TAIL_SIZE)
 	}
 	head->tsize++;
 }
+
 void refreshFood(struct food f[], int nfood)//обновление еды
 { for(size_t i=0; i<nfood; i++)
 	{
-	if(f[i].put_time)
+	if(f[i].put_time!=0)
 		{
-		if(!f[i].enable || ((time(NULL)-f[i].put_time)>FOOD_EXPIRE_SECONDS))
+		if(!(f[i].enable) || ((time(NULL) - f[i].put_time) == FOOD_EXPIRE_SECONDS))
 			{
 			putFoodSeed(&f[i]);
 			}
@@ -309,16 +306,24 @@ if ((snake->preddirection==LEFT && key!=RIGHT) || (snake->preddirection==RIGHT &
 	}
 return 0;
 }
-
+//void setColor(int objectType){}
+void startMenu(){}
 
 int main(){
-	
+
 setlocale(LC_CTYPE, "");
 	struct snake_t snake = initSnake( 10, 5, 2);
+	HANDLE  hConsole;
+    struct colors now_colors = {9,6,4,5,7};
+    //startMenu();
+      hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  // you can loop k higher to see more color choices
+   SetConsoleTextAttribute(hConsole, now_colors.color_snake);
 	printSnake(snake);
 	int32_t key;
 	struct food f[MAX_FOOD_SIZE]; //food  f;
-	initFood(f, MAX_FOOD_SIZE);
+	//initFood(f, MAX_FOOD_SIZE);
+	SetConsoleTextAttribute(hConsole,now_colors.color_food);
 	putFood(food, SEED_NUMBER);
 	while(1)
 		{
@@ -367,11 +372,13 @@ setlocale(LC_CTYPE, "");
 		case -119://Й
 		case 'Q'://81 'Q'
 		case 'q'://113 'q'
+		SetConsoleTextAttribute(hConsole, now_colors.color_message);
 		printf("\nBay!");
 		return 0;
 		break;
 		case 'P':// 'P'
 		case 'p':// 'p'
+		SetConsoleTextAttribute(hConsole, now_colors.color_message);
 		printf("\nGame in PAUSE\n\n");
 		system("pause");
 		break;
@@ -385,12 +392,16 @@ setlocale(LC_CTYPE, "");
 		else snake = moveDir(snake,key=snake.preddirection);
 		sleep(1);
 		system("cls");
+		SetConsoleTextAttribute(hConsole, now_colors.color_snake);
 		printSnake(snake);
 		delay(&snake);
-        putFood(f, SEED_NUMBER);
         refreshFood(f, SEED_NUMBER);
+       SetConsoleTextAttribute(hConsole, now_colors.color_food);
+       putFood(f, SEED_NUMBER);
+        SetConsoleTextAttribute(hConsole, now_colors.color_level);
         printLevel(&snake);
-		}
+		}//while
+SetConsoleTextAttribute(hConsole, now_colors.color_message);
  printExit(&snake);
 	return 0;
 	}
