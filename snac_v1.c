@@ -597,10 +597,10 @@ setlocale(LC_CTYPE, "");
 		break;	
 			}
 		snake = moveDir(snake,key);
-		snake2 = moveDir2(snake2,key);
+		snake2 = moveDir2(snake2,key2);
 		}
 		else {snake = moveDir(snake,key=snake.direction);
-			snake2 = moveDir2(snake2,key=snake2.direction);}
+			snake2 = moveDir2(snake2,key2=snake2.direction);}
 		sleep(1);
 		system("cls");
 		SetConsoleTextAttribute(hConsole, now_colors.color_snake);
